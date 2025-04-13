@@ -38,7 +38,7 @@ public class enemyAI : MonoBehaviour
     [Header("References")]
     public Transform player;
 
-    private float aiDistance;
+    public float aiDistance;
     private bool walking = true, chasing, searching;
     private Vector3 lastKnownLocation;
     private Quaternion originalRotation;
