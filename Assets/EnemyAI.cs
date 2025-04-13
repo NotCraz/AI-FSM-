@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class enemyAI : MonoBehaviour
 {
+    [Header("Hearing Settings")]
+    public float hearingRange = 10f;
+    public PlayerMovement playerScript;
+
     [Header("Navigation Settings")]
     public NavMeshAgent ai;
     public List<Transform> destinations;
@@ -74,6 +78,8 @@ public class enemyAI : MonoBehaviour
         {
             Patrol();
         }
+
+        HearingCheck();
 
         if (visualizeVisionCone) VisualizeVisionCone();
     }
@@ -223,6 +229,17 @@ public class enemyAI : MonoBehaviour
             StartChasing();
         }
     }
+    private void HearingCheck()
+    {
+        if (!playerScript.IsCrouching() && Vector3.Distance(transform.position, player.position) <= hearingRange)
+        {
+            if (!IsPlayerVisible() && !chasing && !searching)
+            {
+                lastKnownLocation = player.position;
+                SwitchToSearching();
+            }
+        }
+    }
 
     private void VisualizeVisionCone()
     {
@@ -235,6 +252,11 @@ public class enemyAI : MonoBehaviour
             Vector3 dir = Quaternion.Euler(0, angle, 0) * transform.forward;
             Debug.DrawRay(origin, dir * sightDistance, Color.yellow);
         }
+    }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, hearingRange);
     }
 
     public void OnPlayerHidden()
