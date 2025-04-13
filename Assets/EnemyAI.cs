@@ -147,7 +147,7 @@ public class enemyAI : MonoBehaviour
     {
         float searchTimer = 0f;
         float searchDuration = Random.Range(minSearchTime, maxSearchTime);
-        float targetAngle = Random.Range(-60f, 60f);
+        float targetAngle = Random.Range(-360f, 360f);
 
         Quaternion startRotation = transform.rotation;
         Quaternion targetRotation = Quaternion.Euler(0, targetAngle, 0) * startRotation;

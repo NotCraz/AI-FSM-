@@ -2829,7 +2829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bbe633a8a641543b9da218b7ccc56f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 5
   groundDrag: 15
   jumpForce: 5
   jumpCooldown: 1
